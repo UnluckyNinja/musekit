@@ -31,7 +31,7 @@ jobs:
     - name: yarn task
       run: |
         yarn
-        yarn build --if-present --base=/$REPOSITORY_SLUG/
+        yarn build --if-present --base=/${{ env.REPOSITORY_SLUG }}/
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v3
       with:
