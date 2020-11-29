@@ -10,12 +10,13 @@ on:
 
 jobs:
   build:
-
-    runs-on: ubuntu-latest
+    name: Build on node ${{ matrix.node-version }} and ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
 
     strategy:
       matrix:
         node-version: ['12', '14']
+        os: [windows-latest]
 
     steps:
     - uses: actions/checkout@v2
@@ -23,12 +24,14 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - name: npm task
-      run: |
-        npm install
-        npm run build --if-present
+    - name: "Repository Meta"
+      uses: varunsridharan/action-repository-meta@main
       env:
-        BASE_URL: ${{ github.repository.name }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: yarn task
+      run: |
+        yarn
+        yarn build --if-present --base=/$REPOSITORY_SLUG/
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v3
       with:
