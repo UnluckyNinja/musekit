@@ -1,19 +1,24 @@
 <template>
   <h1>{{ msg }}</h1>
   <button @click="count++">count is: {{ count }}</button>
-  <p>Edit <code>components/HelloWorld.vue</code> to test hot module replacement.</p>
+  <button class="black" @click="count++">count is: {{ count }}</button>
+  <p>
+    Edit <code>components/HelloWorld.vue</code> to test hot module replacement.
+  </p>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { defineComponent } from 'vue'
+let component = defineComponent({
   name: 'HelloWorld',
   props: {
-    msg: String
+    msg: String,
   },
   data() {
     return {
-      count: 0
+      count: 0,
     }
-  }
-}
+  },
+})
+export default component
 </script>
