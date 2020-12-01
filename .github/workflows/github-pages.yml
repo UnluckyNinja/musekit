@@ -30,7 +30,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: yarn task
       run: |
-        echo $env:REPOSITORY_SLUG
         yarn
         yarn build --if-present --base=/$env:REPOSITORY_SLUG/
     - name: Deploy
